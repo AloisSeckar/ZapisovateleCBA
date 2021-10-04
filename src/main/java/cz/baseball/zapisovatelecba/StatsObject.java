@@ -3,7 +3,7 @@ package cz.baseball.zapisovatelecba;
 import cz.baseball.zapisovatelecba.objects.*;
 import java.util.HashMap;
 import lombok.*;
-import org.apache.maven.shared.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 @Data
 @NoArgsConstructor

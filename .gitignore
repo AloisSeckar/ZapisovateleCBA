@@ -26,3 +26,6 @@ target/*
 nbactions.xml
 
 !/ZapisovateleCBA.jar
+
+# IDEA
+.idea

@@ -1,5 +1,5 @@
 # ZapisovateleCBA
-Season stats for CBA baseball scorers
+Season stats for CBA baseball scorers (v2022)
 
 ## Description and usage
 
@@ -7,6 +7,6 @@ This Java program fetches https://www.baseball.cz/zapisovatele/nominace/ via HTT
 
 ## Possible future development
 
-*Configurable rules for rewards (currently hardcoded)
-*Log results into files
-*Export into XLSX
+* Configurable rules for rewards (currently hardcoded)
+* Log results into files
+* Export into XLSX

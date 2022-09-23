@@ -56,6 +56,7 @@ public class StatsObject {
                     scorerRecord.incGamesEXL();
                     break;
                 case "LIG":
+                case "NLig":
                     scorerRecord.incGamesLIG();
                     break;
                 case "U21":
@@ -63,6 +64,9 @@ public class StatsObject {
                     break;
                 case "U18":
                     scorerRecord.incGamesU18();
+                    break;
+                case "CBP":
+                    // no action - CBP scoring not being paid by CBA
                     break;
                 default:
                     System.out.println("WARN: No action available for league='" + leagueName + "'");

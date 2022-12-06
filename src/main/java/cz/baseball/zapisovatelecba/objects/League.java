@@ -9,6 +9,7 @@ public class League implements Comparable<League> {
     
     private int totalGames;
     private int unhandledGames;
+    private int notPlayedGames;
 
     public League(String name) {
         this.name = name;
@@ -20,6 +21,10 @@ public class League implements Comparable<League> {
     
     public void incUnhandledGames() {
         unhandledGames++;
+    }
+
+    public void incNotPlayedGames() {
+        notPlayedGames++;
     }
 
     @Override

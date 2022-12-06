@@ -28,8 +28,13 @@ public class Main {
                         stats.incCellsEncountered();
                     }
                     if (stats.getCellsEncountered() == 1) {
+                        // first cell with league abbr.
                         stats.setLeagueName(stripCellTags(line));
+                    } else if (stats.getCellsEncountered() == 9) {
+                        // cell with result
+                        stats.setNotPlayedFlag(line.contains(">0 : 0<"));
                     } else if (stats.getCellsEncountered() == 10) {
+                        // cell with scorer's name (if any)
                         String scorerName = stripCellTags(line);
                         if (isHumanName(scorerName)) {
                             scorerName = reverseScorerName(scorerName);
@@ -39,28 +44,34 @@ public class Main {
                 }
             });
 
-            System.out.println("SOUTĚŽE");
+            System.out.println("PREHLED");
             System.out.println("=======");
             System.out.println();
 
-            System.out.print("SOUTĚŽ\t");
-            System.out.print("ZÁPASY\t");
-            System.out.println("NOMINACE");
-            System.out.println("-----------------------");
+            System.out.print("SOUTEZ\t");
+            System.out.print("ZAPASY\t");
+            System.out.print("NOMI.\t");
+            System.out.print("NEOB.\t");
+            System.out.println("NEHR.\t");
+            System.out.println("-------------------------------------");
 
             stats.getLeagues().values().stream().sorted().forEach(record -> {
                 System.out.print(record.getName().toUpperCase() + "\t");
 
                 int total = record.getTotalGames();
                 int unhandled = record.getUnhandledGames();
-                int handled = total - unhandled;
+                int notPlayed = record.getNotPlayedGames();
+                int handled = total - unhandled - notPlayed;
 
-                System.out.println(total + "\t" + handled + "/" + total);
+                System.out.print(total + "\t");
+                System.out.print(handled + "\t");
+                System.out.print(unhandled + "\t");
+                System.out.println(notPlayed + "\t");
             });
 
             System.out.println();
 
-            System.out.println("ZAPISOVATELÉ");
+            System.out.println("ZAPISOVATELE");
             System.out.println("============");
             System.out.println();
 

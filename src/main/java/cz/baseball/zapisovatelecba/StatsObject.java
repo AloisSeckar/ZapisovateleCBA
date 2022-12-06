@@ -15,6 +15,7 @@ public class StatsObject {
     private int cellsEncountered = 0;
     
     private String leagueName;
+    private boolean notPlayedFlag;
     
     @Setter(AccessLevel.NONE)
     private final HashMap<String, Scorer> scorers = new HashMap<>();
@@ -42,37 +43,41 @@ public class StatsObject {
         }
         
         leagueRecord.incTotalGames();
-        
-        if (StringUtils.isNotBlank(scorerName)) {
-            Scorer scorerRecord = scorers.get(scorerName);
-            if (scorerRecord == null) {
-                scorerRecord = new Scorer(scorerName);
-                scorers.put(scorerName, scorerRecord);
-            }
 
-            switch (leagueRecord.getName()) {
-                case "Exl":
-                case "NExl":
-                    scorerRecord.incGamesEXL();
-                    break;
-                case "LIG":
-                case "NLig":
-                    scorerRecord.incGamesLIG();
-                    break;
-                case "U21":
-                    scorerRecord.incGamesU21();
-                    break;
-                case "U18":
-                    scorerRecord.incGamesU18();
-                    break;
-                case "CBP":
-                    // no action - CBP scoring not being paid by CBA
-                    break;
-                default:
-                    System.out.println("WARN: No action available for league='" + leagueName + "'");
-            }
+        if (notPlayedFlag) {
+            leagueRecord.incNotPlayedGames();
         } else {
-            leagueRecord.incUnhandledGames();
+            if (StringUtils.isNotBlank(scorerName)) {
+                Scorer scorerRecord = scorers.get(scorerName);
+                if (scorerRecord == null) {
+                    scorerRecord = new Scorer(scorerName);
+                    scorers.put(scorerName, scorerRecord);
+                }
+
+                switch (leagueRecord.getName()) {
+                    case "Exl":
+                    case "NExl":
+                        scorerRecord.incGamesEXL();
+                        break;
+                    case "LIG":
+                    case "NLig":
+                        scorerRecord.incGamesLIG();
+                        break;
+                    case "U21":
+                        scorerRecord.incGamesU21();
+                        break;
+                    case "U18":
+                        scorerRecord.incGamesU18();
+                        break;
+                    case "CBP":
+                        // no action - CBP scoring not being paid by CBA
+                        break;
+                    default:
+                        System.out.println("WARN: No action available for league='" + leagueName + "'");
+                }
+            } else {
+                leagueRecord.incUnhandledGames();
+            }
         }
     }
     
